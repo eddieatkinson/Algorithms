@@ -9,7 +9,7 @@ def merge_and_sort(first_array, second_array):
 			a.pop(0)
 	if len(a) > 0:
 		final_array += a
-	elif len(b) > 0:
+	else:
 		final_array += b
 	return final_array
 
