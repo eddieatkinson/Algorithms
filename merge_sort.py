@@ -1,4 +1,7 @@
-def merge_and_sort(first_array, second_array):
+import numpy
+import numpy.random as r
+
+def merge_and_sort(a, b):
 	final_array = []
 	while len(a) != 0 and len(b) != 0:
 		if a[0] > b[0]:
@@ -13,7 +16,17 @@ def merge_and_sort(first_array, second_array):
 		final_array += b
 	return final_array
 
-a = [1, 3, 5, 7, 10, 11]
-b = [2, 4, 6, 7, 10, 11, 12]
+def merge_sort(a):
+	if len(a) == 1:
+		return a
+	midpoint = len(a) / 2
+	first_half = merge_sort(a[:midpoint])
+	second_half = merge_sort(a[midpoint:])
+	return merge_and_sort(first_half, second_half)
 
-print merge_and_sort(a, b)
+
+random_array = r.random_integers(0, 100, 10).tolist()
+print random_array
+
+sorted_array = merge_sort(random_array)
+print sorted_array
