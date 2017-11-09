@@ -1,16 +1,23 @@
 class MyQueue:
 	def __init__(self):
-		self.queue = []
+		self.stack1 = MyStack()
+		self.stack2 = MyStack()
 
 	def enqueue(self, new_element):
 		# Adds the new element to the end of the array.
-		self.queue.append(new_element)
+		if self.stack2.peek() is None:
+			self.stack1.push(new_element)
+		else:
+			while self.stack2.peek() is not None:
+				self.stack1.push(self.stack2.pop())
+			self.stack1.push(new_element)
 
 	def dequeue(self):
 		# Removes the first element from the array and return it.
-		element = self.queue[0]
-		del self.queue[0]
-		return element
+		if self.stack2.peek() is None:
+			while self.stack1.peek() is not None:
+				self.stack2.push(self.stack1.pop())
+		return self.stack2.pop()
 
 class MyStack:
 	def __init__(self):
@@ -31,27 +38,3 @@ class MyStack:
 		# Return the top most element.
 		last_index = len(self.stack) - 1
 		return self.stack[last_index]
-
-# my_stack = MyStack()
-
-# my_stack.push(3)
-# my_stack.push(4)
-# my_stack.push(5)
-
-# print my_stack.stack
-
-# print my_stack.pop()
-
-# # print my_stack.stack
-
-# print my_stack.peek()
-
-my_queue = MyQueue()
-
-my_queue.enqueue(1)
-my_queue.enqueue(2)
-
-print my_queue.queue
-
-print my_queue.dequeue()
-# print my_queue.queue
