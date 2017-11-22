@@ -65,9 +65,36 @@ class LinkedList:
 		else:
 			return False
 
+	def delete_at_index(self, target_index):
+		current_index = 0
+		current_node = self.start
+
+		while current_index != target_index:
+			if current_node is None:
+				return None
+			current_node = current_node.right
+			current_index += 1
+
+		if self.end == current_node:
+			self.remove_last_node()
+
+		else:
+			current_node.right.left = current_node.left
+			current_node.left.right = current_node.right
+			current_node.right = None
+			current_node.left = None
+
+
+
+
+
 ll = LinkedList()
 ll.append(10)
 ll.append(11)
 ll.append(16)
+
+ll.print_all_node_values()
+
+ll.delete_at_index(1)
 
 ll.print_all_node_values()
