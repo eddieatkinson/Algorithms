@@ -54,6 +54,14 @@ class MyBinaryTreeNode(Node):
 		else:
 			return right_subtree_height + 1
 
+	def print_in_order(self):
+		if self.left is not None:
+			self.left.print_in_order()
+		print self.value
+
+		if self.right is not None:
+			self.right.print_in_order()
+
 class BST:
 	def __init__(self):
 		self.root = None
@@ -75,8 +83,12 @@ class BST:
 	def height(self):
 		if self.root is not None:
 			return self.root.height()
-
 		return 0
+
+	def print_in_order(self):
+		if self.root is not None:
+			self.root.print_in_order()
+
 
 def random_numers(total_numbers):
 	return[int(1000 * nprnd.random()) for i in range(total_numbers)]
@@ -89,4 +101,5 @@ for i in a:
 
 show(tree.root)
 # print tree.exists(a[9])
-print tree.height()
+# print tree.height()
+tree.print_in_order()
