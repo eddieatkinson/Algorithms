@@ -62,6 +62,24 @@ class MyBinaryTreeNode(Node):
 		if self.right is not None:
 			self.right.print_in_order()
 
+	def print_preorder(self):
+        print self.value
+
+        if self.left is not None:
+            self.left.print_in_order()
+
+        if self.right is not None:
+            self.right.print_in_order()
+
+    def print_post_order(self):
+        if self.left is not None:
+            self.left.print_in_order()
+
+        if self.right is not None:
+            self.right.print_in_order()
+
+        print self.value
+
 class BST:
 	def __init__(self):
 		self.root = None
