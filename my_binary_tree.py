@@ -66,17 +66,17 @@ class MyBinaryTreeNode(Node):
         print self.value
 
         if self.left is not None:
-            self.left.print_in_order()
+            self.left.print_preorder()
 
         if self.right is not None:
-            self.right.print_in_order()
+            self.right.print_preorder()
 
     def print_post_order(self):
         if self.left is not None:
-            self.left.print_in_order()
+            self.left.print_post_order()
 
         if self.right is not None:
-            self.right.print_in_order()
+            self.right.print_post_order()
 
         print self.value
 
