@@ -119,5 +119,5 @@ for i in a:
 
 show(tree.root)
 # print tree.exists(a[9])
-# print tree.height()
-tree.print_in_order()
+print tree.height()
+# tree.print_in_order()
