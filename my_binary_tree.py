@@ -1,5 +1,6 @@
 import numpy.random as nprnd
 from binarytree import Node, show
+from collections import deque
 
 class MyBinaryTreeNode(Node):
 	def __init__(self, value):
@@ -63,22 +64,51 @@ class MyBinaryTreeNode(Node):
 			self.right.print_in_order()
 
 	def print_preorder(self):
-        print self.value
+		print self.value
 
-        if self.left is not None:
-            self.left.print_preorder()
+		if self.left is not None:
+			self.left.print_preorder()
 
-        if self.right is not None:
-            self.right.print_preorder()
+		if self.right is not None:
+			self.right.print_preorder()
 
-    def print_post_order(self):
-        if self.left is not None:
-            self.left.print_post_order()
+	def print_post_order(self):
+		if self.left is not None:
+			self.left.print_post_order()
 
-        if self.right is not None:
-            self.right.print_post_order()
+		if self.right is not None:
+			self.right.print_post_order()
 
-        print self.value
+		print self.value
+
+	def is_root(self):
+		return self.parent is None
+
+	def is_right_child(self):
+		if self.is_root():
+			return False 
+		return self.value >= self.parent.value
+
+	def is_left_child(self):
+		if self.is_root():
+			return False 
+		return self.value < self.parent.value
+
+	def left_rotate(self):
+		if self.is_root() or self.is_left_child():
+			return
+
+		pivot = self
+		og_left = self.left
+		og_parent = self.parent
+
+		og_parent.parent = pivot
+		pivot.left = og_parent
+		
+		og_parent.right = og_left
+		og_left.parent = og_parent
+		
+		return og_parent
 
 class BST:
 	def __init__(self):
@@ -107,6 +137,32 @@ class BST:
 		if self.root is not None:
 			self.root.print_in_order()
 
+	def test_rotate(self):
+		if self.root is None or self.root.right is None:
+			return
+
+		og_parent = self.root.right.left_rotate()
+		
+		if og_parent == self.root:
+			self.root = og_parent.parent
+
+
+	def print_level_order(self):
+		if self.root is None:
+			return
+
+		queue = deque()
+		queue.append(self.root)
+
+		while len(queue) != 0:
+			current_node = queue.popleft()
+			print current_node.value
+
+			if current_node.left is not None:
+				queue.append(current_node.left)
+
+			if current_node.right is not None:
+				queue.append(current_node.right)
 
 def random_numers(total_numbers):
 	return[int(1000 * nprnd.random()) for i in range(total_numbers)]
@@ -118,6 +174,5 @@ for i in a:
 	tree.add(i)
 
 show(tree.root)
-# print tree.exists(a[9])
-print tree.height()
-# tree.print_in_order()
+tree.test_rotate()
+show(tree.root)
