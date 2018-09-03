@@ -104,7 +104,7 @@ class MyBinaryTreeNode(Node):
 
 		og_parent.parent = pivot
 		pivot.left = og_parent
-		
+
 		og_parent.right = og_left
 		og_left.parent = og_parent
 		
